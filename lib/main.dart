@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Google Places Demo',
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primaryColor: Color.fromARGB(255, 251, 203, 4),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: InstantLocation());

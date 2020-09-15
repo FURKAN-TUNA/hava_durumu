@@ -131,8 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (context) => InstantLocation()));
                   break;
                 case 1:
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()));
                   break;
               }
             });

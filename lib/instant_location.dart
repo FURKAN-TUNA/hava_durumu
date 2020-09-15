@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hava_durumu/home_page.dart';
+import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 
 const kGoogleApiKey = "AIzaSyBsJSWotej3zidCHU5Nnpf_BexRidQYdNU";
@@ -15,6 +16,8 @@ class _InstantLocationState extends State<InstantLocation> {
   int _curIndex = 0;
   double lat, lon;
   WeatherFactory ws;
+  List<Weather> _data = [];
+  final f = new DateFormat.MMMMd();
   @override
   initState() {
     ws = new WeatherFactory(key);
@@ -24,29 +27,122 @@ class _InstantLocationState extends State<InstantLocation> {
 
   Future<void> bul() async {
     Position position =
-        await getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+        await getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
 
     lat = position.latitude;
     lon = position.longitude;
+    print(lat);
     Weather w = await ws.currentWeatherByLocation(lat, lon);
-    return Text(w.temperature.celsius.round().toString() + "° C");
+    return [
+      w.temperature.celsius.round().toString() + "° C",
+      w.areaName,
+      w.weatherMain,
+      w.country
+    ];
+  }
+
+  Future<void> fiveDayForecast() async {
+    List<Weather> w = await ws.fiveDayForecastByLocation(lat, lon);
+    setState(() {
+      _data = w;
+    });
+    return _data;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 251, 203, 4),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(DateFormat('EEE').format(DateTime.now()) +
+                ", " +
+                f.format(DateTime.now())),
+            Text('°C')
+          ],
+        ),
       ),
-      body: FutureBuilder(
-        future: bul(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            print(lat);
-            return Text('Loading');
-          }
-          return snapshot.data;
-        },
+      body: Column(
+        children: [
+          FutureBuilder(
+            future: bul(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: Text('Loading'));
+              }
+              return Column(
+                children: [
+                  Container(
+                    color: Color.fromARGB(255, 251, 203, 4),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(f.format(DateTime.now())),
+                              ]),
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                snapshot.data[0],
+                                style: TextStyle(fontSize: 40),
+                              ),
+                            ]),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              snapshot.data[1] + ", ",
+                            ),
+                            Text(snapshot.data[3]),
+                            // Text(snapshot.data[2]),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          Row(
+            children: [
+              Text('deneme'),
+              Image(
+                image: AssetImage('giff/sunny.gif'),
+                width: 250,
+              )
+            ],
+          ),
+          // Column(
+          //   children: [
+          //     FutureBuilder(
+          //         future: fiveDayForecast(),
+          //         builder: (context, snapshot) {
+          //           if (!snapshot.hasData) {
+          //             return Center(child: Text('Loading'));
+          //           }
+          //           return Column(
+          //             children: [
+          //               ListView.builder(
+          //                   itemCount: _data.length,
+          //                   itemBuilder: (BuildContext context, int index) {
+          //                     print(_data[index].date.toString());
+          //                     return Container(
+          //                         child: Text(_data[index].date.toString()));
+          //                   }),
+          //             ],
+          //           );
+          //         }),
+          //   ],
+          // ),
+        ],
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(),
@@ -58,10 +154,6 @@ class _InstantLocationState extends State<InstantLocation> {
               _curIndex = index;
               switch (_curIndex) {
                 case 0:
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => InstantLocation()));
                   break;
                 case 1:
                   Navigator.push(context,
