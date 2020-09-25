@@ -25,16 +25,20 @@ class _InstantLocationState extends State<InstantLocation> {
   int _curIndex = 0;
   double lat, lon;
   WeatherFactory ws;
+  Language language= Language.ENGLISH;
+
   final f = new DateFormat.MMMMd();
   final f2 = new DateFormat.Hm();
   @override
   initState() {
-    ws = new WeatherFactory(key, language: Language.TURKISH);
+
+    ws = new WeatherFactory(key, language: language);
 
     super.initState();
   }
 
   Future<void> bul() async {
+
     List<Weather> day = new List<Weather>();
     Position position = await getCurrentPosition(
       desiredAccuracy: LocationAccuracy.lowest,
@@ -58,7 +62,10 @@ class _InstantLocationState extends State<InstantLocation> {
       } else if (w.sunset.isBefore(DateTime.now())) {
         background = 'images/night.png';
       }
+      // Locale l = Localizations.localeOf(context);
+      // l.languageCode=='tr'?language=Language.TURKISH:language=Language.ENGLISH;
     });
+
     return [
       w.temperature.celsius.round().toString() + "° C",
       w.areaName,
