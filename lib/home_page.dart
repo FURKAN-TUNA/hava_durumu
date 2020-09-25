@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   WeatherFactory ws;
   @override
   void initState() {
-    ws = new WeatherFactory(key);
+    ws = new WeatherFactory(key, language: Language.TURKISH);
     setState(() {
       cityListId = SharedPrefs.getCities() == null
           ? cityListId = ['ChIJsS1zINVH0xQRjSuEwLBX3As']
