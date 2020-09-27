@@ -84,45 +84,47 @@ class FiveDays extends StatelessWidget {
       } else if (w[i].date.day == DateTime.now().day + 5) {
         day5.add(w[i]);
       }
+
     }
+
     return Container(
       child: Column(
         children: [
           Container(
             child: Column(
               children: [
-                FiveDays(
+                day1.length != 0 ?FiveDays(
                   day: DateFormat('EEEE').format(day1[0].date),
                   image: day1[0].weatherMain,
                   maxTemp: minMax(day1)[1].toString(),
                   minTemp: minMax(day1)[0].toString(),
                   gif: gif,
                   textColor: textColor,
-                ),
-                FiveDays(
+                ): Text(' '),
+                day2.length != 0? FiveDays(
                   day: DateFormat('EEEE').format(day2[0].date),
                   image: day2[0].weatherMain,
                   maxTemp: minMax(day2)[1].toString(),
                   minTemp: minMax(day2)[0].toString(),
                   gif: gif,
                   textColor: textColor,
-                ),
-                FiveDays(
+                ): Text(' '),
+                day3.length != 0? FiveDays(
                   day: DateFormat('EEEE').format(day3[0].date),
                   image: day3[0].weatherMain,
                   maxTemp: minMax(day3)[1].toString(),
                   minTemp: minMax(day3)[0].toString(),
                   gif: gif,
                   textColor: textColor,
-                ),
-                FiveDays(
+                ): Text(' '),
+                day4.length != 0?FiveDays(
                   day: DateFormat('EEEE').format(day4[0].date),
                   image: day4[0].weatherMain,
                   maxTemp: minMax(day4)[1].toString(),
                   minTemp: minMax(day4)[0].toString(),
                   gif: gif,
                   textColor: textColor,
-                ),
+                ): Text(' '),
                 day5.length != 0
                     ? FiveDays(
                         day: DateFormat('EEEE').format(day5[0].date),
