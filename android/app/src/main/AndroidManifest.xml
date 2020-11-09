@@ -12,6 +12,7 @@
         android:label="hava_durumu"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCMvYtbDr4LInCG9kQ1oxGRx5ynTh15cH8"/>
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-1425913863923510~2891325446"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -35,62 +35,78 @@ class HourlyWeather extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              HourlyWeather(
-                clock: w[0].date.hour.toString(),
-                image: w[0].weatherMain,
-                temp: w[0].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[1].date.hour.toString(),
-                image: w[1].weatherMain,
-                temp: w[1].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[2].date.hour.toString(),
-                image: w[2].weatherMain,
-                temp: w[2].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[3].date.hour.toString(),
-                image: w[3].weatherMain,
-                temp: w[3].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[5].date.hour.toString(),
-                image: w[5].weatherMain,
-                temp: w[5].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[6].date.hour.toString(),
-                image: w[6].weatherMain,
-                temp: w[6].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[7].date.hour.toString(),
-                image: w[7].weatherMain,
-                temp: w[7].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
-              HourlyWeather(
-                clock: w[8].date.hour.toString(),
-                image: w[8].weatherMain,
-                temp: w[8].temperature.celsius.round().toString(),
-                gif: gif,
-                textColor: textColor,
-              ),
+              w[0] != null
+                  ? HourlyWeather(
+                      clock: w[0].date.hour.toString(),
+                      image: w[0].weatherMain,
+                      temp: w[0].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[1] != null
+                  ? HourlyWeather(
+                      clock: w[1].date.hour.toString(),
+                      image: w[1].weatherMain,
+                      temp: w[1].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[2] != null
+                  ? HourlyWeather(
+                      clock: w[2].date.hour.toString(),
+                      image: w[2].weatherMain,
+                      temp: w[2].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[3] != null
+                  ? HourlyWeather(
+                      clock: w[3].date.hour.toString(),
+                      image: w[3].weatherMain,
+                      temp: w[3].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[4] != null
+                  ? HourlyWeather(
+                      clock: w[4].date.hour.toString(),
+                      image: w[4].weatherMain,
+                      temp: w[4].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[5] != null
+                  ? HourlyWeather(
+                      clock: w[5].date.hour.toString(),
+                      image: w[5].weatherMain,
+                      temp: w[5].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[6] != null
+                  ? HourlyWeather(
+                      clock: w[6].date.hour.toString(),
+                      image: w[6].weatherMain,
+                      temp: w[6].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
+              w[7] != null
+                  ? HourlyWeather(
+                      clock: w[7].date.hour.toString(),
+                      image: w[7].weatherMain,
+                      temp: w[7].temperature.celsius.round().toString(),
+                      gif: gif,
+                      textColor: textColor,
+                    )
+                  : Container(),
             ],
           ),
         ),
